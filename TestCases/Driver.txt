@@ -1,0 +1,67 @@
+TC-1: Add a Driver
+
+  1. Open admin → click Drivers tab
+  2. Click Add Driver
+  3. Fill in: Name = Raju Kumar, Phone = 9876543210, Vehicle = 🛵 Scooter
+  4. Click Add Driver
+  5. Expected: Driver appears in table with green "Active" badge and scooter icon ✓
+  6. Expected: Stats row updates to "1 total · 1 active" ✓
+
+  ---
+  TC-2: Edit a Driver
+
+  1. Click the pencil ✏️ icon on Raju's row
+  2. Change name to Raju K., change vehicle to 🚲 Bike
+  3. Click Save Changes
+  4. Expected: Table row updates with new name and bike icon ✓
+
+  ---
+  TC-3: Toggle Driver Active/Inactive
+
+  1. Click the green Active badge on Raju's row
+  2. Expected: Badge changes to gray Inactive ✓
+  3. Expected: Driver is no longer shown in the assign dropdown in Orders tab
+  4. Click Inactive again → Expected: Back to Active ✓
+
+  ---
+  TC-4: Assign Driver to an Order
+
+  1. Go to admin → Orders tab
+  2. Click on any order to expand it
+  3. In the expanded row, find the Driver section
+  4. Expected: Shows "Unassigned" and a dropdown listing active drivers
+  5. Select Raju K. from the dropdown
+  6. Expected: Section immediately shows "Raju K." without page refresh ✓
+  7. Expected: No error shown ✓
+
+  ---
+  TC-5: Inactive Driver Not in Dropdown
+
+  1. Toggle Raju to Inactive (TC-3)
+  2. Go to Orders tab → expand an order
+  3. Expected: Raju does NOT appear in the assign dropdown ✓
+  4. Toggle Raju back to Active
+
+  ---
+  TC-6: Unassign Driver
+
+  1. Expand an order that has Raju assigned
+  2. Select — Unassign — from the dropdown
+  3. Expected: Section changes back to "Unassigned" ✓
+
+  ---
+  TC-7: Driver hidden after Delivery
+
+  1. Find a delivered or cancelled order and expand it
+  2. Expected: No assign dropdown shown (driver name shown if was assigned, but no dropdown) ✓
+
+  ---
+  TC-8: Customer sees Driver Name (Real-time)
+
+  1. Place a test order as a customer
+  2. Admin assigns Raju to the order
+  3. Admin changes status to out_for_delivery
+  4. Customer opens /orders/:id
+  5. Expected (within 8 seconds via polling): Orange banner appears — "Your Delivery Driver: Raju K." with 🛵 icon ✓
+  6. Admin changes status to delivered
+  7. Expected: Banner disappears (only shows during out_for_delivery) ✓

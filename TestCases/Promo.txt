@@ -1,0 +1,55 @@
+ Test 1 — Admin UI: New Fields in PromoModal
+
+  1. Open admin → Promos tab → click Add Code
+  2. Verify 4 new fields appear:
+    - "Max Uses Per Customer" (number input)
+    - "Applicable Categories" (text input)
+    - "First-order only" (checkbox)
+    - "Auto-apply at checkout" (checkbox)
+  3. Create a basic promo (code: TEST10, 10% off) → save → appears in table ✓
+
+  ---
+  Test 2 — Per-Customer Usage Limit
+
+  1. Admin → create promo: ONCE, 20% off, Max Uses Per Customer = 1
+  2. Log in as a customer → add to cart → checkout → enter ONCE → Applied ✓
+  3. Place the order
+  4. Go to checkout again with a new cart → enter ONCE → Expected error: "You have already used this code the maximum number of
+  times" ✓
+  5. Log in as a different customer → enter ONCE → should work (limit is per-user, not global) ✓
+
+  ---
+  Test 3 — First-Order-Only
+
+  1. Admin → create promo: WELCOME20, 20% off, ✅ First-order only
+  2. Log in as an existing customer (who has orders) → checkout → enter WELCOME20 → Expected error: "This promo code is valid for
+  first-time orders only" ✓
+  3. Create a brand-new account (no orders) → checkout → enter WELCOME20 → Applied ✓
+
+  ---
+  Test 4 — Category-Specific Discount
+
+  1. Note your product categories (e.g., "Dry Fruits")
+  2. Admin → create promo: DRYFRUIT15, 15% off, Applicable Categories = Dry Fruits
+  3. Customer: add only a Vegetables product to cart → checkout → enter DRYFRUIT15 → Expected error: "This code only applies to: Dry
+  Fruits" ✓
+  4. Customer: add a Dry Fruits product + a Vegetables product → checkout → enter DRYFRUIT15
+    - Expected: Discount applied only to the Dry Fruits subtotal (not the full cart) ✓
+
+  ---
+  Test 5 — Auto-Apply at Checkout
+
+  1. Admin → create promo: AUTO50, ₹50 off, ✅ Auto-apply at checkout, Min Order = 0
+  2. Customer: add items to cart → open checkout page
+  3. Expected: Promo AUTO50 is automatically applied without typing anything, discount shown in order summary ✓
+  4. Customer can click "×" to remove it if they want ✓
+  5. If no promo already applied: auto-apply fires → if one is already manually applied: auto-apply skips ✓
+
+  ---
+  Test 6 — PromoTable Badges
+
+  Open admin → Promos tab → verify the table shows:
+  - 🔵 "1st Order" badge on first-order-only promos
+  - 🟢 "Auto" badge on auto-apply promos
+  - 🟠 Category name chip on category-restricted promos
+  - 🟣 "N× / user" badge on per-customer limited promos ✓

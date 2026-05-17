@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #C15F3C;
+  --color-primary-dark: #A04B2D;
+  --color-primary-light: #FBEEE8;
+  --color-accent: #D4960F;
+  --color-accent-dark: #B07808;
+  --color-yellow: #FDD835;
+  --color-cream: #FAFAF5;
+  --color-dark: #1C1C1E;
+  --color-muted: #6B6B6B;
+  --color-border: #EEEEEE;
+  --font-sans: var(--font-dm-sans), 'DM Sans', sans-serif;
+  --font-serif: var(--font-playfair), 'Playfair Display', serif;
+}
+
+:root {
+  --background: #FAFAF5;
+  --foreground: #1C1C1E;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Hide scrollbar for category pills */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

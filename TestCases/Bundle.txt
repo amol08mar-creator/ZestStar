@@ -1,0 +1,66 @@
+Step 1 — Create the "bundles" Category (prerequisite)
+
+  1. Open admin → Categories tab
+  2. Click Add Category → name it exactly bundles → Save
+  3. Expected: Category appears in the list ✓
+
+  ---
+  Test 1 — Create a Bundle
+
+  1. Open admin → Bundles tab (Gift icon, after Drivers)
+  2. Expected: Empty state with "Create your first bundle" button + amber info note ✓
+  3. Click Create Bundle
+  4. Expected: ProductModal opens with bundles pre-selected in the Category dropdown AND the "Bundle Items" section is already
+  visible at the bottom ✓
+  5. Fill in:
+    - Name: Dry Fruits Combo Pack
+    - Price: ₹499
+    - Stock: 50
+  6. In the Bundle Items section: select Cashews from dropdown → qty 1 → click +
+  7. Select Almonds → qty 1 → click +
+  8. Click Apply as Original Price → original price auto-fills with the sum
+  9. Click Add Product (Save)
+  10. Expected: Bundle appears in the Bundles tab table ✓
+
+  ---
+  Test 2 — Bundle shows in Shop
+
+  1. Open http://localhost:3000/shop
+  2. Find the "Dry Fruits Combo Pack" product card
+  3. Expected: Below the product name, constituent items are listed as bullets:
+  • Cashews × 1
+  • Almonds × 1
+  4. Expected: If any constituent product goes out of stock, the bundle also shows as "Out of Stock" ✓
+
+  ---
+  Test 3 — Edit a Bundle (add/remove items)
+
+  1. Admin → Bundles tab → click pencil ✏️ on the bundle
+  2. Expected: Modal opens pre-filled with all fields + existing constituent items already in the list ✓
+  3. Add another item: select Walnuts → qty 2 → click +
+  4. Remove Almonds by clicking the trash icon
+  5. Save
+  6. Expected: Bundle now shows Cashews ×1 and Walnuts ×2 ✓
+  7. Refresh the shop page — bundle card shows updated items ✓
+
+  ---
+  Test 4 — Bundle appears in Inventory tab too
+
+  1. Admin → Inventory tab → search for "Dry Fruits Combo"
+  2. Expected: Bundle appears in the regular inventory (it's still a product)
+  3. Click edit pencil on it → modal opens with bundle items section visible ✓
+
+  ---
+  Test 5 — Delete a Bundle
+
+  1. Admin → Bundles tab → click trash 🗑️ on the bundle
+  2. Expected: Confirmation dialog: "Delete Bundle? ... will be permanently removed..."
+  3. Click Delete
+  4. Expected: Bundle removed from list ✓
+  5. Go to /shop → bundle no longer appears ✓
+
+  ---
+  Test 6 — Bundle out-of-stock propagation
+
+  1. Admin → Inventory → find a constituent product (e.g., Cashews) → set stock to 0
+  2. Go to /shop → the bundle card should show Out of Stock overlay even if the bundle's own stock is > 0 ✓
