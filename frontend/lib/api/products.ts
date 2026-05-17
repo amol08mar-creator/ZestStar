@@ -46,14 +46,14 @@ async function handle(res: Response) {
 
 export async function fetchProducts(
   token: string,
-  params: { search?: string; category?: string; stock_status?: string; page?: number } = {},
+  params: { search?: string; category?: string; stock_status?: string; page?: number; limit?: number } = {},
 ) {
   const q = new URLSearchParams();
   if (params.search) q.set('search', params.search);
   if (params.category) q.set('category', params.category);
   if (params.stock_status) q.set('stock_status', params.stock_status);
   if (params.page) q.set('page', String(params.page));
-  q.set('limit', '100');
+  q.set('limit', String(params.limit ?? 100));
 
   const res = await fetch(`${API}/admin/products?${q}`, { headers: headers(token) });
   return handle(res);

@@ -157,6 +157,7 @@ export default function OrderPage() {
   const canEdit = ['placed', 'confirmed'].includes(order.status);
 
   function startEdit() {
+    if (!order) return;
     setEditItems(order.order_items.map((i) => ({
       product_id: i.product_id ?? undefined,
       product_name: i.product_name,

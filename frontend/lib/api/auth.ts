@@ -2,7 +2,7 @@ const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
 export interface AuthUser {
   id: string;
-  phone: string;
+  phone: string | null;
   email: string | null;
   name: string | null;
   is_new_user?: boolean;
